@@ -118,3 +118,33 @@ function getArtistEventData(artistChoice) {
 
 // testData();
 
+var weatherAPIKey = "4a5b27e8dacd4394811170611230310"
+
+function getWeatherData(){
+    var location = 'Dallas'; // Replace with your desired location
+    const apiUrl = `https://api.weatherapi.com/v1/forecast.json?q=${location}&key=${weatherAPIKey}`;
+
+    fetch(apiUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Handle the weather data here
+        console.log(data);
+
+        // Extract specific weather information from the 'data' object as needed
+        const temperature = data.current.temp_f;
+        console.log(temperature);
+        const weatherDescription = data.current.condition[0];
+        console.log(weatherDescription);
+        // ... and so on
+      })
+      .catch(error => {
+        // Handle errors here
+        console.error('Fetch error:', error);
+      });
+}
+    getWeatherData()
