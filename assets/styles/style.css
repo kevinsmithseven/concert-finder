@@ -1,0 +1,41 @@
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 5px solid black;
+}
+
+h1 {
+    margin: 0 auto;
+}
+
+#flexMain {
+    display: flex;
+    align-items: flex-start;
+}
+
+#events-container {
+    width: 30vw;
+}
+
+#modal-header {
+    border: none;
+}
+
+.modal-card {
+    top: 30%;
+}
+
+#events-container {
+    border: 2px solid black;
+    border-radius: 5px;
+    height: 70vh;
+}
+
+#event-details {
+    border: 2px solid black;
+    border-radius: 5px;
+
+}
