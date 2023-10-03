@@ -1,21 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-
-    <link rel="stylesheet" href="./assets/styles/style.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="./assets/styles/style.css" />
     <title>Document</title>
-</head>
-<body>
-    
+  </head>
+  <body>
+    <header>
+      <h1 class="title">Concert Finder</h1>
+      <!-- *dropdown nav for saved content  -->
 
+      <div class="dropdown">
+        <div class="dropdown-trigger">
+          <button
+            class="button"
+            aria-haspopup="true"
+            aria-controls="dropdown-menu"
+          >
+            <span>Dropdown button</span>
+            <span class="icon is-small">
+              <i class="fas fa-angle-down" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+          <div class="dropdown-content">
+            <a href="#" class="dropdown-item"> Dropdown item </a>
+            <a class="dropdown-item"> Other dropdown item </a>
+            <a href="#" class="dropdown-item is-active">
+              Active dropdown item
+            </a>
+            <a href="#" class="dropdown-item"> Other dropdown item </a>
+            <hr class="dropdown-divider" />
+            <a href="#" class="dropdown-item"> With a divider </a>
+          </div>
+        </div>
+      </div>
+    </header>
 
+    <!-- *hero img placeholder  -->
+    <section class="hero is-primary">
+      <div class="hero-body">
+        <p class="title">Primary hero</p>
+        <p class="subtitle">Primary subtitle</p>
+      </div>
+    </section>
 
+    <!-- *flex parent for aside and main  -->
+    <div id="flexMain">
+      <!-- *section for aside  -->
+      <section id="events-container" class="section is-meduim">
+        <h1 class="title">Look for events!</h1>
+<!-- *this button will pop out the modal  -->
+        <button id="modal-btn" class="button is-medium js-modal-trigger" data-target="modal-js-example">Search</button>
 
+        <h2 class="subtitle">
+         this is a placeholder for where the search results will append to the page.
+        </h2>
+        <div>
+            <ul>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+      </section>
 
+<!-- *modal placeholder  -->
+      <div class="modal" id="modal-card">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header id="modal-header" class="modal-card-head">
+            <p class="modal-card-title">Modal title</p>
+            <button id="close-modal" class="delete" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+            <!-- Content ... -->
+            <form id="form-container" class="section modal-wrap">
+            <div class="field">
+                <label class="label">City:</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="e.g Dallas">
+                </div>
+              </div>
 
-<script src="./assets/js/script.js"></script>
-</body>
+              <div class="field">
+                <label class="label">Band</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="e.g Modest Mouse">
+                </div>
+              </div>
+
+            </form>
+              
+          </section>
+
+          <footer class="modal-card-foot">
+            <div class="control">
+                <button class="button is-primary">Submit</button>
+              </div>
+            <!-- <button class="button">Cancel</button> -->
+          </footer>
+        </div>
+      </div>
+
+      <!-- *section for main  -->
+      <section id="event-details" class="section is-large">
+        <h1 class="title">Event Details</h1>
+        <h2 class="subtitle">
+         this is a placeholder for where the selected event details from aside will render.
+        </h2>
+      </section>
+    </div>
+<!-- *footer placeholder  -->
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
+            <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+            is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+          </p>
+        </div>
+      </footer>
+
+      <!-- <script src="path/to/the/downloaded/folder/dist/bulma.js"></script> -->
+      <script src="./assets/js/pageFunction.js" ></script>
+    <script src="./assets/js/script.js"></script>
+  </body>
 </html>
