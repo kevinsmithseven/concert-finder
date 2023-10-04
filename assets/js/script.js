@@ -9,7 +9,8 @@ var modalSearchButton = document.getElementById("modal-btn");
 var mainDetail = document.getElementById("details-container");
 var saveEventButton = document.getElementById("save-btn)");
 var footer = document.getElementById("footer");
-var inputForm = document.getElementById("form-container");
+var inputFormCity = document.getElementById("form-container-city");
+var inputFormArtist = document.getElementById("form-container-artist");
 var inputCity = document.getElementById("city");
 var inputArtist = document.getElementById("artist")
 var submitButtonCity = document.getElementById("submit-btn-city");
@@ -48,37 +49,39 @@ function cityFormSubmitHandler(event) {
     event.preventDefault();
 
     //* establish variables that accept the input of the city text field and trim
-    var cityChoice = inputCity.elements.city.value.trim();    
+    var cityChoice = inputCity.value.trim();
+    console.log(cityChoice);
+    console.log(inputCity);
 
     //* check and see whether there is input in the field and run the appropriate function - display alerts if none are filled or both
     if (cityChoice) {
-        getCityEventData(cityChoice); 
+        getCityEventData(cityChoice);
 
     } else {
-        alert("Please enter a city name")
-    }   
+        alert("Please enter a city name");
+    }
 }
 
-//* accepts input from artist modal form and checks if artist exists
-function artistFormSubmitHandler(event) {
-    event.preventDefault();
+// //* accepts input from artist modal form and checks if artist exists
+// function artistFormSubmitHandler(event) {
+//     event.preventDefault();
 
-    //* establish variables that accept the input of the artist text field and trim
-    var artistChoice = inputArtist.elements.city.value.trim();    
+//     //* establish variables that accept the input of the artist text field and trim
+//     var artistChoice = inputArtist.elements.city.value.trim();    
 
-    //* check and see whether there is input in the field and run the appropriate function - display alerts if none are filled or both
-    if (artistChoice) {
-        getArtistEventData(artistChoiceChoice);
+//     //* check and see whether there is input in the field and run the appropriate function - display alerts if none are filled or both
+//     if (artistChoice) {
+//         getArtistEventData(artistChoiceChoice);
 
-    } else {
-        alert("Please enter an artist name");
-    }   
-}
+//     } else {
+//         alert("Please enter an artist name");
+//     }   
+// }
 
 
 //* function to fetch data for events in the city entered in the modal form
 function getCityEventData(cityChoice) {
-    var cityEventFetchURL = "https://app.ticketmaster.com/discovery/v2/events.json?city=" + cityChoice + "&apikey=" + concertAPIKey;
+    var cityEventFetchURL = "https://app.ticketmaster.com/discovery/v2/events.json?city=" + cityChoice + "&classificationName=Music&sort=date,asc&apikey=" + concertAPIKey;
 
     fetch(cityEventFetchURL)
         .then(function (response) {
@@ -91,26 +94,78 @@ function getCityEventData(cityChoice) {
         .then(function (cityEventData) {
             console.log(cityEventData);
         })
+
+        // Call function to display events in aside
+        // displayCityEvents(cityEventData);
+
+        .catch(function (error) {
+            console.error(error.message)
+        })
+
+    
+}
+
+// Display city events in cards in aside
+function displayCityEvents(cityEventData) {
+
+    for (let i = 0; i < cityEventData._embedded.events.length; i++) {
+
+        var cardHTML = $(`
+        asideEventList.innerHTML = ""
+        <div class="card">
+            <header class="card-header">
+             <p class="card-header-title">
+                ${cityEventData._embedded.events.name}
+             </p>
+             <button class="card-header-icon" aria-label="more options">
+               <span class="icon">
+                 <i class="fas fa-angle-down" aria-hidden="true"></i>
+               </span>
+             </button>
+            </header>
+          <div class="card-content">
+           <div class="content">
+            <ul>
+            <li> ${cityEventData._embedded.events.dates.start.localTime}
+            <li> ${cityEventData._embedded.events.dates.start.localDate}
+            <li> Prices range from ${cityEventData._embedded.events.priceRanges.min} to ${cityEventData._embedded.events.priceRanges.max}
+            <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+            <br>
+            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+           </div>
+        </div>
+      <footer class="card-footer">
+        <a href="#" class="card-footer-item">Save</a>
+        <a href="#" class="card-footer-item">Edit</a>
+        <a href="#" class="card-footer-item">Delete</a>
+      </footer>
+     </div>   
+    `);
+        asideEventList.append(cardHTML);
+
+    }
+
+
+
 }
 
 
+// //* function to fetch data for events for the artist entered in the modal form
+// function getArtistEventData(artistChoice) {
+//     var artistEventFetchURL = "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + artistChoice + "&apikey=" + concertAPIKey;
 
-//* function to fetch data for events for the artist entered in the modal form
-function getArtistEventData(artistChoice) {
-    var artistEventFetchURL = "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + artistChoice + "&apikey=" + concertAPIKey;
-
-    fetch(artistEventFetchURL)
-        .then(function (response) {
-            if (response.ok) {
-                return response.json();
-            } else {
-                alert("Artist not found, please check spelling and try again")
-            }
-        })
-        .then(function (artistEventData) {
-            console.log(artistEventData);
-        })
-}
+//     fetch(artistEventFetchURL)
+//         .then(function (response) {
+//             if (response.ok) {
+//                 return response.json();
+//             } else {
+//                 alert("Artist not found, please check spelling and try again")
+//             }
+//         })
+//         .then(function (artistEventData) {
+//             console.log(artistEventData);
+//         })
+// }
 
 
 
@@ -131,42 +186,42 @@ function getArtistEventData(artistChoice) {
 
 var weatherAPIKey = "4a5b27e8dacd4394811170611230310"
 
-function getWeatherData(){
+function getWeatherData() {
     var location = 'Dallas'; // Replace with your desired location
     const apiUrl = `https://api.weatherapi.com/v1/forecast.json?q=${location}&key=${weatherAPIKey}`;
 
     fetch(apiUrl)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        // Handle the weather data here
-        console.log(data);
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Handle the weather data here
+            console.log(data);
 
-        // Extract specific weather information from the 'data' object as needed
-        const temperature = data.current.temp_f;
-        console.log(temperature);
-        const weatherDescription = data.current.condition[0];
-        console.log(weatherDescription);
-        // ... and so on
-      })
-      .catch(error => {
-        // Handle errors here
-        console.error('Fetch error:', error);
-      });
+            // Extract specific weather information from the 'data' object as needed
+            const temperature = data.current.temp_f;
+            console.log(temperature);
+            const weatherDescription = data.current.condition[0];
+            console.log(weatherDescription);
+            // ... and so on
+        })
+        .catch(error => {
+            // Handle errors here
+            console.error('Fetch error:', error);
+        });
 }
-    getWeatherData()
+getWeatherData()
 
 // ****************basic page functions***********************************************************************
-    // *dropdown function 
+// *dropdown function 
 
 var dropdown = document.querySelector('.dropdown');
-dropdown.addEventListener('click', function(event) {
-  event.stopPropagation();
-  dropdown.classList.toggle('is-active');
+dropdown.addEventListener('click', function (event) {
+    event.stopPropagation();
+    dropdown.classList.toggle('is-active');
 });
 
 // *modal function 
@@ -179,38 +234,38 @@ var closeModalCity = document.getElementById("close-modal-city");
 var closeModalArtist = document.getElementById("close-modal-artist");
 var modalBackgroundArtist = document.getElementById("modal-background-artist")
 var modalBackgroundCity = document.getElementById("modal-background-city")
- 
-modalBtnCity.onclick = function() {
+
+modalBtnCity.onclick = function () {
     modalCardCity.style.display = "block"
 }
 
-closeModalCity.onclick = function() {
+closeModalCity.onclick = function () {
     modalCardCity.style.display = "none"
 }
 
-modalBackgroundCity.onclick = function(event) {
-    
+modalBackgroundCity.onclick = function (event) {
+
     if (event.target == modalBackgroundCity) {
         modalCardCity.style.display = "none";
-        
+
     }
 };
 
 
 
 
-modalBtnArtist.onclick = function() {
+modalBtnArtist.onclick = function () {
     modalCardArtist.style.display = "block"
 }
 
-closeModalArtist.onclick = function() {
+closeModalArtist.onclick = function () {
     modalCardArtist.style.display = "none"
 }
 
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target == modalBackgroundArtist) {
         modalCardArtist.style.display = "none";
-       
+
     }
 };
 
@@ -220,3 +275,5 @@ console.log(currentDay);
 // ****************basic page functions***********************************************************************
 
 //* Event listeners
+
+submitButtonCity.addEventListener('click', cityFormSubmitHandler);
