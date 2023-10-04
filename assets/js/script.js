@@ -23,6 +23,7 @@ var submitButtonArtist = document.getElementById("submit-btn-artist");
 //* {classificationName} can be used to limit results, we could use "Music"
 //* {startDate} and {endDate} we can use to limit time frame of the search, we would need to add dayjs functionality
 //* {city} this can be used to search for events in a specific city
+//* {sort=date,asc} sort by newest events first
 //* {id} - this will return the details for an event - can be found in the event array data
 
 // TODO Need to go over the various key options in array and decide which ones we want to use
@@ -42,29 +43,36 @@ var submitButtonArtist = document.getElementById("submit-btn-artist");
 // TODO Logic - do we need separate functions for the above? I think yes
 // TODO add dayjs() to html so we can use to reference dates in logic, i.e, if we are limiting search to two weeks, we need to know current date for comparison
 
-//* accepts input from modal form and determines if a city or artist was entered and running the fetch function for that choice
-function modalFormSubmitHandler(event) {
+//* accepts input from city modal form and checks if city exists
+function cityFormSubmitHandler(event) {
     event.preventDefault();
-    //* establish variables that accept the input of either field and trim
-    var cityChoice = inputCity.elements.city.value.trim();
-    var artistChoice = inputArtist.elements.city.value.trim();
 
-    //* check and see whether there is input in either field and run the appropriate function - display alerts if none are filled or both
-    if (cityChoice && !artistChoice) {
-        getCityEventData(cityChoice);
-    }
+    //* establish variables that accept the input of the city text field and trim
+    var cityChoice = inputCity.elements.city.value.trim();    
 
-    if (!cityChoice && artistChoice) {
-        getArtistEventData(artistChoice);
-    }
+    //* check and see whether there is input in the field and run the appropriate function - display alerts if none are filled or both
+    if (cityChoice) {
+        getCityEventData(cityChoice) 
 
-    if (cityChoice && artistChoice) {
-        alert("Please enter only a city or an artist")
-    }
+    } else {
+        alert("Please enter a city name")
+    }   
+}
 
-    if (!cityChoice && !artistChoice) {
-        alert("Please enter a city or an artist to search")
-    }
+//* accepts input from artist modal form and checks if artist exists
+function artistFormSubmitHandler(event) {
+    event.preventDefault();
+
+    //* establish variables that accept the input of the artist text field and trim
+    var artistChoice = inputArtist.elements.city.value.trim();    
+
+    //* check and see whether there is input in the field and run the appropriate function - display alerts if none are filled or both
+    if (artistChoice) {
+        getArtistEventData(artistChoiceChoice) 
+
+    } else {
+        alert("Please enter an artist name")
+    }   
 }
 
 
@@ -202,3 +210,5 @@ var currentDay = dayjs().format('DD/MM/YYYY')
 console.log(currentDay);
 
 // ****************basic page functions***********************************************************************
+
+//* Event listeners
