@@ -12,7 +12,8 @@ var footer = document.getElementById("footer");
 var inputForm = document.getElementById("form-container");
 var inputCity = document.getElementById("city");
 var inputArtist = document.getElementById("artist")
-var submitButton = document.getElementById("submit-btn");
+var submitButtonCity = document.getElementById("submit-btn-city");
+var submitButtonArtist = document.getElementById("submit-btn-artist");
 
 
 // Gets Event data from Ticketmaster API
@@ -160,22 +161,44 @@ dropdown.addEventListener('click', function(event) {
 
 // *modal function 
 
-var modalBtn = document.getElementById("modal-btn");
-var modalCard = document.getElementById("modal-card");
-var close = document.getElementById("close-modal");
+var modalBtnCity = document.getElementById("modal-btn-city");
+var modalBtnArtist = document.getElementById("modal-btn-artist");
+var modalCardCity = document.getElementById("modal-card-city");
+var modalCardArtist = document.getElementById("modal-card-artist");
+var closeModalCity = document.getElementById("close-modal-city");
+var closeModalArtist = document.getElementById("close-modal-artist");
  
-modalBtn.onclick = function() {
-    modalCard.style.display = "block"
+modalBtnCity.onclick = function() {
+    modalCardCity.style.display = "block"
 }
 
-close.onclick = function() {
-    modalCard.style.display = "none"
+closeModalCity.onclick = function() {
+    modalCardCity.style.display = "none"
 }
 
 window.onclick = function(event) {
     if (event.target.className == "modal-background") {
-        modalCard.style.display = "none";
+        modalCardCity.style.display = "none";
     }
+};
+
+
+
+modalBtnArtist.onclick = function() {
+    modalCardCity.style.display = "block"
 }
+
+closeModalArtist.onclick = function() {
+    modalCardArtist.style.display = "none"
+}
+
+window.onclick = function(event) {
+    if (event.target.className == "modal-background") {
+        modalCardArtist.style.display = "none";
+    }
+};
+
+var currentDay = dayjs().format('DD/MM/YYYY')
+console.log(currentDay);
 
 // ****************basic page functions***********************************************************************
