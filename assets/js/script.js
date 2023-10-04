@@ -93,6 +93,8 @@ function getCityEventData(cityChoice) {
         })
 }
 
+
+
 //* function to fetch data for events for the artist entered in the modal form
 function getArtistEventData(artistChoice) {
     var artistEventFetchURL = "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + artistChoice + "&apikey=" + concertAPIKey;
@@ -113,7 +115,7 @@ function getArtistEventData(artistChoice) {
 
 
 // function testData () {
-//     var testDataURL = "https://app.ticketmaster.com/discovery/v2/events.json?city=Dallas&classificationName=Music&id=vvG1YZ9Rpgpfev&apikey=" + concertAPIKey;
+//     var testDataURL = "https://app.ticketmaster.com/discovery/v2/events.json?city=Dallas&classificationName=Music&apikey=" + concertAPIKey;
 
 //     fetch(testDataURL)
 //         .then(function (response) {
