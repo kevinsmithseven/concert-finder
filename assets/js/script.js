@@ -52,7 +52,7 @@ function cityFormSubmitHandler(event) {
 
     //* check and see whether there is input in the field and run the appropriate function - display alerts if none are filled or both
     if (cityChoice) {
-        getCityEventData(cityChoice) 
+        getCityEventData(cityChoice); 
 
     } else {
         alert("Please enter a city name")
@@ -68,10 +68,10 @@ function artistFormSubmitHandler(event) {
 
     //* check and see whether there is input in the field and run the appropriate function - display alerts if none are filled or both
     if (artistChoice) {
-        getArtistEventData(artistChoiceChoice) 
+        getArtistEventData(artistChoiceChoice);
 
     } else {
-        alert("Please enter an artist name")
+        alert("Please enter an artist name");
     }   
 }
 
