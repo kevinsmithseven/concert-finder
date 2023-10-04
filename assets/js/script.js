@@ -175,6 +175,8 @@ var modalCardCity = document.getElementById("modal-card-city");
 var modalCardArtist = document.getElementById("modal-card-artist");
 var closeModalCity = document.getElementById("close-modal-city");
 var closeModalArtist = document.getElementById("close-modal-artist");
+var modalBackgroundArtist = document.getElementById("modal-background-artist")
+var modalBackgroundCity = document.getElementById("modal-background-city")
  
 modalBtnCity.onclick = function() {
     modalCardCity.style.display = "block"
@@ -184,16 +186,19 @@ closeModalCity.onclick = function() {
     modalCardCity.style.display = "none"
 }
 
-window.onclick = function(event) {
-    if (event.target.className == "modal-background") {
+modalBackgroundCity.onclick = function(event) {
+    
+    if (event.target == modalBackgroundCity) {
         modalCardCity.style.display = "none";
+        
     }
 };
 
 
 
+
 modalBtnArtist.onclick = function() {
-    modalCardCity.style.display = "block"
+    modalCardArtist.style.display = "block"
 }
 
 closeModalArtist.onclick = function() {
@@ -201,8 +206,9 @@ closeModalArtist.onclick = function() {
 }
 
 window.onclick = function(event) {
-    if (event.target.className == "modal-background") {
+    if (event.target == modalBackgroundArtist) {
         modalCardArtist.style.display = "none";
+       
     }
 };
 
