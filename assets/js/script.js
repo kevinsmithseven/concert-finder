@@ -129,9 +129,9 @@ function displayCityEvents(cityEventData) {
         var cardHTML = `      
         <div class="card">
             <header class="card-header">
-             <p class="card-header-title accordion">
+             <button class="card-header-title accordion">
                 ${events.name}
-             </p>
+             </button>
              <button class="card-header-icon" aria-label="more options">
                <span class="icon">
                  <i class="fas fa-angle-down" aria-hidden="true"></i>
