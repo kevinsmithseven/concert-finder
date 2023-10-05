@@ -129,7 +129,7 @@ function displayCityEvents(cityEventData) {
         var cardHTML = `      
         <div class="card">
             <header class="card-header">
-             <p class="card-header-title">
+             <p class="card-header-title accordion">
                 ${events.name}
              </p>
              <button class="card-header-icon" aria-label="more options">
@@ -138,7 +138,7 @@ function displayCityEvents(cityEventData) {
                </span>
              </button>
             </header>
-          <div class="card-content">
+          <div class="card-content panel">
            <div class="content">
             <ul>
             <li> ${events.dates.start.localTime}
@@ -148,12 +148,13 @@ function displayCityEvents(cityEventData) {
             <br>
             <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
            </div>
-        </div>
       <footer class="card-footer">
         <a href="#" class="card-footer-item">Save</a>
         <a href="#" class="card-footer-item">Edit</a>
         <a href="#" class="card-footer-item">Delete</a>
       </footer>
+      </div>
+
      </div>   
     `;
 
@@ -284,6 +285,30 @@ window.onclick = function (event) {
 
 var currentDay = dayjs().format('DD/MM/YYYY')
 console.log(currentDay);
+
+
+// *card accordion
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    /* Toggle between adding and removing the "active" class,
+    to highlight the button that controls the panel */
+    this.classList.toggle("active");
+
+    /* Toggle between hiding and showing the active panel */
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
+
+
 
 // ****************basic page functions***********************************************************************
 
