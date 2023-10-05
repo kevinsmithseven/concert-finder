@@ -93,29 +93,44 @@ function getCityEventData(cityChoice) {
         })
         .then(function (cityEventData) {
             console.log(cityEventData);
-        })
 
-        // Call function to display events in aside
-        displayCityEvents(cityEventData);
+
+            displayCityEvents(cityEventData);
+        })
 
         .catch(function (error) {
-            console.error(error.message)
-        })
-
-    
+            console.error(error.message);
+        });
 }
 
 // Display city events in cards in aside
 function displayCityEvents(cityEventData) {
+    console.log(cityEventData);
+    asideEventList.innerHTML = "";
 
-    for (let i = 0; i < cityEventData._embedded.events.length; i++) {
+    // for (let i = 0; i < cityEventData._embedded.events.length; i++) {
+    //     const event = cityEventData._embedded.events[i];
+    //     const eventItem = document.createElement("li");
+    //     eventItem.textContent = event.name;
+    //     eventItem.classList.add("event-card"); // Add a CSS class for styling
+    //     eventItem.addEventListener("click", () => showEventDetails(event));
+    //     asideEventList.appendChild(eventItem);
+    // }
 
-        var cardHTML = $(`
-        asideEventList.innerHTML = ""
+    asideEventList.innerHTML = "";
+    
+
+    for (let i = 0; i < 10; i++) {
+        var events = cityEventData._embedded.events[i];
+        console.log(events);
+        // var priceRanges = cityEventData._embedded.events.priceRanges[i];
+        // console.log(priceRanges);
+
+        var cardHTML = `      
         <div class="card">
             <header class="card-header">
              <p class="card-header-title">
-                ${cityEventData._embedded.events.name}
+                ${events.name}
              </p>
              <button class="card-header-icon" aria-label="more options">
                <span class="icon">
@@ -126,9 +141,9 @@ function displayCityEvents(cityEventData) {
           <div class="card-content">
            <div class="content">
             <ul>
-            <li> ${cityEventData._embedded.events.dates.start.localTime}
-            <li> ${cityEventData._embedded.events.dates.start.localDate}
-            <li> Prices range from ${cityEventData._embedded.events.priceRanges.min} to ${cityEventData._embedded.events.priceRanges.max}
+            <li> ${events.dates.start.localTime}
+            <li> ${events.dates.start.localDate}
+            
             <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
             <br>
             <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
@@ -140,13 +155,11 @@ function displayCityEvents(cityEventData) {
         <a href="#" class="card-footer-item">Delete</a>
       </footer>
      </div>   
-    `);
-        asideEventList.append(cardHTML);
+    `;
+
+    asideEventList.insertAdjacentHTML("beforeend", cardHTML);
 
     }
-
-
-
 }
 
 
