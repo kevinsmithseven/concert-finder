@@ -126,8 +126,8 @@ function displayCityEvents(cityEventData) {
     for (let i = 0; i < 10; i++) {
         var events = cityEventData._embedded.events[i];
         var venue = cityEventData._embedded.events[i]._embedded.venues[0];
-        console.log(venue);
-        console.log(events);
+        // console.log(venue);
+        // console.log(events);
         // var priceRanges = cityEventData._embedded.events.priceRanges[i];
         // console.log(priceRanges);
 
@@ -164,6 +164,39 @@ function displayCityEvents(cityEventData) {
 
         asideEventList.insertAdjacentHTML("beforeend", cardHTML);
 
+    }
+}
+
+
+document.body.addEventListener('click', function (event) {
+    if (event.target && event.target.classList.contains("save-btn")) {
+        const eventName = event.target.getAttribute("data-event-name")
+        console.log(eventName);
+        var savedEvents = JSON.parse(localStorage.getItem("saved-events")) || [];
+        savedEvents.push(eventName);
+
+        localStorage.setItem("saved-events", JSON.stringify(savedEvents));
+
+        console.log(savedEvents);
+
+        displaySaved(savedEvents);
+    }
+})
+
+function displaySaved(savedEvents) {
+    var dropdownContent = document.querySelector(".dropdown-content");
+
+    // dropdownContent.innerHTML = "";
+
+    for (let i = 0; i < savedEvents.length; i++) {
+        const savedEventList = savedEvents[i];
+
+        var dropdownItem = document.createElement("a");
+        dropdownItem.href = "#"
+        dropdownItem.classList.add("dropdown-item")
+        dropdownItem.textContent = savedEventList
+
+        dropdownContent.appendChild(dropdownItem)
     }
 }
 
