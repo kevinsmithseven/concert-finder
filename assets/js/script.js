@@ -198,6 +198,9 @@ function displayCityEvents(cityEventData) {
 
 // testData();
 
+
+
+
 var weatherAPIKey = "4a5b27e8dacd4394811170611230310"
 
 function getWeatherData() {
@@ -228,6 +231,25 @@ function getWeatherData() {
         });
 }
 getWeatherData()
+
+// var weatherDataContainer =
+//     function displayWeatherData(data) {
+//         weatherDataContainer.innerHTML = ""
+//         // Clear previous weather data
+//         // Extract and display relevant weather information here
+//         // Customize this part based on your API response structure
+//         const temperature = data.current.temp_f;
+//         const weatherDescription = data.current.condition.text;
+//         const weatherInfo =
+//             document.createElement('div');
+//         weatherInfo.innerHTML =
+//             <ul>
+//                 <li>Temperature: ${temperature}</li>
+//                 <li>Description: ${weatherDescription}</li>
+//             </ul>;
+
+//             weatherDataContainer.appendChild(weatherInfo);
+//     }
 
 // ****************basic page functions***********************************************************************
 // *dropdown function 
