@@ -15,6 +15,7 @@ var inputCity = document.getElementById("city");
 var inputArtist = document.getElementById("artist")
 var submitButtonCity = document.getElementById("submit-btn-city");
 var submitButtonArtist = document.getElementById("submit-btn-artist");
+var saveButton = document.querySelectorAll(".save-btn")
 
 
 // Gets Event data from Ticketmaster API
@@ -60,6 +61,7 @@ function cityFormSubmitHandler(event) {
     } else {
         alert("Please enter a city name");
     }
+    console.log(event.target);
 }
 
 // //* accepts input from artist modal form and checks if artist exists
@@ -101,6 +103,7 @@ function getCityEventData(cityChoice) {
         .catch(function (error) {
             console.error(error.message);
         });
+
 }
 
 // Display city events in cards in aside
@@ -118,10 +121,12 @@ function displayCityEvents(cityEventData) {
     // }
 
     asideEventList.innerHTML = "";
-    
+
 
     for (let i = 0; i < 10; i++) {
         var events = cityEventData._embedded.events[i];
+        var venue = cityEventData._embedded.events[i]._embedded.venues[0];
+        console.log(venue);
         console.log(events);
         // var priceRanges = cityEventData._embedded.events.priceRanges[i];
         // console.log(priceRanges);
@@ -143,21 +148,19 @@ function displayCityEvents(cityEventData) {
             <ul>
             <li> ${events.dates.start.localTime}
             <li> ${events.dates.start.localDate}
-            
-            <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+            <li> ${venue.name}<br> ${venue.city.name}, ${venue.state.stateCode} 
             <br>
-            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+            </div>
            </div>
-        </div>
       <footer class="card-footer">
-        <a href="#" class="card-footer-item">Save</a>
-        <a href="#" class="card-footer-item">Edit</a>
-        <a href="#" class="card-footer-item">Delete</a>
+        <a href="#" class="card-footer-item save-btn" data-event-name=${events.name}>Save</a>
+        <a href="#" class="card-footer-item event-det-btn">See Event Details</a>
+        
       </footer>
      </div>   
     `;
 
-    asideEventList.insertAdjacentHTML("beforeend", cardHTML);
+        asideEventList.insertAdjacentHTML("beforeend", cardHTML);
 
     }
 }
