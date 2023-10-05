@@ -105,58 +105,61 @@ function getCityEventData(cityChoice) {
 
 // Display city events in cards in aside
 function displayCityEvents(cityEventData) {
-
+    console.log(cityEventData);
     asideEventList.innerHTML = "";
 
-    for (let i = 0; i < cityEventData._embedded.events.length; i++) {
-        const event = cityEventData._embedded.events[i];
-        const eventItem = document.createElement("li");
-        eventItem.textContent = event.name;
-        eventItem.classList.add("event-card"); // Add a CSS class for styling
-        eventItem.addEventListener("click", () => showEventDetails(event));
-        asideEventList.appendChild(eventItem);
-    }
-
-    // asideEventList.innerHTML = "";
-
     // for (let i = 0; i < cityEventData._embedded.events.length; i++) {
-    //     var events = cityEventData._embedded.events[i];
-    //     var priceRanges = cityEventData._embedded.events.priceRanges[i];
-
-    //     var cardHTML = $(`      
-    //     <div class="card">
-    //         <header class="card-header">
-    //          <p class="card-header-title">
-    //             ${events.name}
-    //          </p>
-    //          <button class="card-header-icon" aria-label="more options">
-    //            <span class="icon">
-    //              <i class="fas fa-angle-down" aria-hidden="true"></i>
-    //            </span>
-    //          </button>
-    //         </header>
-    //       <div class="card-content">
-    //        <div class="content">
-    //         <ul>
-    //         <li> ${events.dates.start.localTime}
-    //         <li> ${events.dates.start.localDate}
-    //         <li> Prices range from ${priceRanges.min} to ${priceRanges.max}
-    //         <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
-    //         <br>
-    //         <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-    //        </div>
-    //     </div>
-    //   <footer class="card-footer">
-    //     <a href="#" class="card-footer-item">Save</a>
-    //     <a href="#" class="card-footer-item">Edit</a>
-    //     <a href="#" class="card-footer-item">Delete</a>
-    //   </footer>
-    //  </div>   
-    // `);
-
-    // asideEventList.append(cardHTML);
-
+    //     const event = cityEventData._embedded.events[i];
+    //     const eventItem = document.createElement("li");
+    //     eventItem.textContent = event.name;
+    //     eventItem.classList.add("event-card"); // Add a CSS class for styling
+    //     eventItem.addEventListener("click", () => showEventDetails(event));
+    //     asideEventList.appendChild(eventItem);
     // }
+
+    asideEventList.innerHTML = "";
+    
+
+    for (let i = 0; i < 10; i++) {
+        var events = cityEventData._embedded.events[i];
+        console.log(events);
+        // var priceRanges = cityEventData._embedded.events.priceRanges[i];
+        // console.log(priceRanges);
+
+        var cardHTML = `      
+        <div class="card">
+            <header class="card-header">
+             <p class="card-header-title">
+                ${events.name}
+             </p>
+             <button class="card-header-icon" aria-label="more options">
+               <span class="icon">
+                 <i class="fas fa-angle-down" aria-hidden="true"></i>
+               </span>
+             </button>
+            </header>
+          <div class="card-content">
+           <div class="content">
+            <ul>
+            <li> ${events.dates.start.localTime}
+            <li> ${events.dates.start.localDate}
+            
+            <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+            <br>
+            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+           </div>
+        </div>
+      <footer class="card-footer">
+        <a href="#" class="card-footer-item">Save</a>
+        <a href="#" class="card-footer-item">Edit</a>
+        <a href="#" class="card-footer-item">Delete</a>
+      </footer>
+     </div>   
+    `;
+
+    asideEventList.insertAdjacentHTML("beforeend", cardHTML);
+
+    }
 }
 
 
