@@ -151,7 +151,7 @@ function displayCityEvents(cityEventData) {
             <li> ${venue.name}<br> ${venue.city.name}, ${venue.state.stateCode} 
             <br>
             </div>
-           </div>
+           
       <footer class="card-footer">
         <a href="#" class="card-footer-item save-btn" data-event-name=${events.name}>Save</a>
         <a href="#" class="card-footer-item event-det-btn">See Event Details</a>
@@ -297,19 +297,19 @@ var acc = document.getElementsByClassName("accordion");
 var i;
 
 for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    /* Toggle between adding and removing the "active" class,
-    to highlight the button that controls the panel */
-    this.classList.toggle("active");
+    acc[i].addEventListener("click", function () {
+        /* Toggle between adding and removing the "active" class,
+        to highlight the button that controls the panel */
+        this.classList.toggle("active");
 
-    /* Toggle between hiding and showing the active panel */
-    var panel = this.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-    } else {
-      panel.style.display = "block";
-    }
-  });
+        /* Toggle between hiding and showing the active panel */
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+            panel.style.display = "none";
+        } else {
+            panel.style.display = "block";
+        }
+    });
 }
 
 
