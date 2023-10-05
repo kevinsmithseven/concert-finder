@@ -132,16 +132,12 @@ function displayCityEvents(cityEventData) {
         // console.log(priceRanges);
 
         var cardHTML = `      
-        <div class="card">
+        <button class="card accordion">
             <header class="card-header">
-             <button class="card-header-title accordion">
+             <p class="card-header-title">
                 ${events.name}
-             </button>
-             <button class="card-header-icon" aria-label="more options">
-               <span class="icon">
-                 <i class="fas fa-angle-down" aria-hidden="true"></i>
-               </span>
-             </button>
+             </p>
+
             </header>
           <div class="card-content panel">
            <div class="content">
