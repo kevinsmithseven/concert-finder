@@ -208,8 +208,6 @@ function displayCityEvents(cityEventData) {
 var weatherAPIKey = "4a5b27e8dacd4394811170611230310"
 
 function getWeatherData() {
-    var city = 'Dallas';
-function getWeatherData() {
     var location = 'Dallas'; // Replace with your desired location
     const apiUrl = `https://api.weatherapi.com/v1/forecast.json?q=${location}&key=${weatherAPIKey}`;
 
@@ -236,7 +234,6 @@ function getWeatherData() {
             console.error('Fetch error:', error);
         });
 }
-getWeatherData()
 getWeatherData()
 
 // var weatherDataContainer =
