@@ -126,8 +126,8 @@ function displayCityEvents(cityEventData) {
     for (let i = 0; i < 10; i++) {
         var events = cityEventData._embedded.events[i];
         var venue = cityEventData._embedded.events[i]._embedded.venues[0];
-        console.log(venue);
-        console.log(events);
+        // console.log(venue);
+        // console.log(events);
         // var priceRanges = cityEventData._embedded.events.priceRanges[i];
         // console.log(priceRanges);
 
@@ -139,7 +139,7 @@ function displayCityEvents(cityEventData) {
              </p>
 
             </header>
-          <div class="card-content panel">
+          <div class="card-content">
            <div class="content">
             <ul>
             <li> ${events.dates.start.localTime}
@@ -160,6 +160,39 @@ function displayCityEvents(cityEventData) {
 
         asideEventList.insertAdjacentHTML("beforeend", cardHTML);
 
+    }
+}
+
+
+document.body.addEventListener('click', function (event) {
+    if (event.target && event.target.classList.contains("save-btn")) {
+        const eventName = event.target.getAttribute("data-event-name")
+        console.log(eventName);
+        var savedEvents = JSON.parse(localStorage.getItem("saved-events")) || [];
+        savedEvents.push(eventName);
+
+        localStorage.setItem("saved-events", JSON.stringify(savedEvents));
+
+        console.log(savedEvents);
+
+        displaySaved(savedEvents);
+    }
+})
+
+function displaySaved(savedEvents) {
+    var dropdownContent = document.querySelector(".dropdown-content");
+
+    // dropdownContent.innerHTML = "";
+
+    for (let i = 0; i < savedEvents.length; i++) {
+        const savedEventList = savedEvents[i];
+
+        var dropdownItem = document.createElement("a");
+        dropdownItem.href = "#"
+        dropdownItem.classList.add("dropdown-item")
+        dropdownItem.textContent = savedEventList
+
+        dropdownContent.appendChild(dropdownItem)
     }
 }
 
@@ -309,26 +342,26 @@ var currentDay = dayjs().format('DD/MM/YYYY')
 console.log(currentDay);
 
 
-// *card accordion
+// // *card accordion
 
-var acc = document.getElementsByClassName("accordion");
-var i;
+// var acc = document.getElementsByClassName("accordion");
+// var i;
 
-for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function () {
-        /* Toggle between adding and removing the "active" class,
-        to highlight the button that controls the panel */
-        this.classList.toggle("active");
+// for (i = 0; i < acc.length; i++) {
+//     acc[i].addEventListener("click", function () {
+//         /* Toggle between adding and removing the "active" class,
+//         to highlight the button that controls the panel */
+//         this.classList.toggle("active");
 
-        /* Toggle between hiding and showing the active panel */
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-            panel.style.display = "none";
-        } else {
-            panel.style.display = "block";
-        }
-    });
-}
+//         /* Toggle between hiding and showing the active panel */
+//         var panel = this.nextElementSibling;
+//         if (panel.style.display === "block") {
+//             panel.style.display = "none";
+//         } else {
+//             panel.style.display = "block";
+//         }
+//     });
+// }
 
 
 
