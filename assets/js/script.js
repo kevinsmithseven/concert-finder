@@ -150,7 +150,7 @@ function displayCityEvents(cityEventData) {
            
       <footer class="card-footer">
         <a href="#" class="card-footer-item save-btn" data-event-name=${events.name}>Save</a>
-        <a href="#" class="card-footer-item event-det-btn">See Event Details</a>
+        <a href="#" class="card-footer-item event-det-btn" data-event-id=${events.id}>See Event Details</a>
         
       </footer>
       </div>
@@ -195,6 +195,43 @@ function displaySaved(savedEvents) {
         dropdownContent.appendChild(dropdownItem)
     }
 }
+
+document.body.addEventListener('click', function (event) {
+    if (event.target && event.target.classList.contains("event-det-btn")) {
+        var eventID = event.target.getAttribute("data-event-id")
+        getEventDetails(eventID)
+    }
+})
+
+
+
+function getEventDetails(eventID) {
+    var eventIDURL = "https://app.ticketmaster.com/discovery/v2/events/" + eventID + ".json?apikey=" + concertAPIKey;
+
+    fetch(eventIDURL)
+        .then(function (response) {
+            if (response.ok) {
+                return response.json();
+
+            }
+        })
+
+        .then(function (eventDetailsData) {
+            console.log(eventDetailsData);
+
+            displayEventDetails(eventDetailsData)
+        })
+
+}
+
+function displayEventDetails(eventDetailsData) {
+    var detailsHTML = `
+    <h2>${eventDetailsData.name}</h2>
+    `
+    mainDetail.innerHTML = detailsHTML
+}
+
+//TODO Seating chart image, Event Name, Date, Time, Price Range, Venue, City, State, URL to buy tickets - weather at bottom
 
 
 // //* function to fetch data for events for the artist entered in the modal form
