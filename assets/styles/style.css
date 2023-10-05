@@ -138,3 +138,12 @@ header {
     display: none;
     overflow: hidden;
   }
+
+  section h1 {
+padding: 40px;
+  }
+
+  #modal-btn-city {
+    background-color: #333;
+    color: #fff;
+  }
