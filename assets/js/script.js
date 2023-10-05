@@ -93,60 +93,70 @@ function getCityEventData(cityChoice) {
         })
         .then(function (cityEventData) {
             console.log(cityEventData);
-        })
 
-        // Call function to display events in aside
-        displayCityEvents(cityEventData);
+
+            displayCityEvents(cityEventData);
+        })
 
         .catch(function (error) {
-            console.error(error.message)
-        })
-
-    
+            console.error(error.message);
+        });
 }
 
 // Display city events in cards in aside
 function displayCityEvents(cityEventData) {
 
+    asideEventList.innerHTML = "";
+
     for (let i = 0; i < cityEventData._embedded.events.length; i++) {
-
-        var cardHTML = $(`
-        asideEventList.innerHTML = ""
-        <div class="card">
-            <header class="card-header">
-             <p class="card-header-title">
-                ${cityEventData._embedded.events.name}
-             </p>
-             <button class="card-header-icon" aria-label="more options">
-               <span class="icon">
-                 <i class="fas fa-angle-down" aria-hidden="true"></i>
-               </span>
-             </button>
-            </header>
-          <div class="card-content">
-           <div class="content">
-            <ul>
-            <li> ${cityEventData._embedded.events.dates.start.localTime}
-            <li> ${cityEventData._embedded.events.dates.start.localDate}
-            <li> Prices range from ${cityEventData._embedded.events.priceRanges.min} to ${cityEventData._embedded.events.priceRanges.max}
-            <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
-            <br>
-            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-           </div>
-        </div>
-      <footer class="card-footer">
-        <a href="#" class="card-footer-item">Save</a>
-        <a href="#" class="card-footer-item">Edit</a>
-        <a href="#" class="card-footer-item">Delete</a>
-      </footer>
-     </div>   
-    `);
-        asideEventList.append(cardHTML);
-
+        const event = cityEventData._embedded.events[i];
+        const eventItem = document.createElement("li");
+        eventItem.textContent = event.name;
+        eventItem.classList.add("event-card"); // Add a CSS class for styling
+        eventItem.addEventListener("click", () => showEventDetails(event));
+        asideEventList.appendChild(eventItem);
     }
 
+    // asideEventList.innerHTML = "";
 
+    // for (let i = 0; i < cityEventData._embedded.events.length; i++) {
+    //     var events = cityEventData._embedded.events[i];
+    //     var priceRanges = cityEventData._embedded.events.priceRanges[i];
 
+    //     var cardHTML = $(`      
+    //     <div class="card">
+    //         <header class="card-header">
+    //          <p class="card-header-title">
+    //             ${events.name}
+    //          </p>
+    //          <button class="card-header-icon" aria-label="more options">
+    //            <span class="icon">
+    //              <i class="fas fa-angle-down" aria-hidden="true"></i>
+    //            </span>
+    //          </button>
+    //         </header>
+    //       <div class="card-content">
+    //        <div class="content">
+    //         <ul>
+    //         <li> ${events.dates.start.localTime}
+    //         <li> ${events.dates.start.localDate}
+    //         <li> Prices range from ${priceRanges.min} to ${priceRanges.max}
+    //         <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+    //         <br>
+    //         <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+    //        </div>
+    //     </div>
+    //   <footer class="card-footer">
+    //     <a href="#" class="card-footer-item">Save</a>
+    //     <a href="#" class="card-footer-item">Edit</a>
+    //     <a href="#" class="card-footer-item">Delete</a>
+    //   </footer>
+    //  </div>   
+    // `);
+
+    // asideEventList.append(cardHTML);
+
+    // }
 }
 
 
