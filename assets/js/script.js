@@ -118,44 +118,66 @@ function getArtistEventData(artistChoice) {
 
 // testData();
 
+
+
+
 var weatherAPIKey = "4a5b27e8dacd4394811170611230310"
 
-function getWeatherData(){
-    var location = 'Dallas'; // Replace with your desired location
+function getWeatherData() {
+    var city = 'Dallas';
     const apiUrl = `https://api.weatherapi.com/v1/forecast.json?q=${location}&key=${weatherAPIKey}`;
 
     fetch(apiUrl)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        // Handle the weather data here
-        console.log(data);
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Handle the weather data here
+            console.log(data);
 
-        // Extract specific weather information from the 'data' object as needed
-        const temperature = data.current.temp_f;
-        console.log(temperature);
-        const weatherDescription = data.current.condition[0];
-        console.log(weatherDescription);
-        // ... and so on
-      })
-      .catch(error => {
-        // Handle errors here
-        console.error('Fetch error:', error);
-      });
+            // Extract specific weather information from the 'data' object as needed
+            const temperature = data.current.temp_f;
+            console.log(temperature);
+            const weatherDescription = data.current.condition.text;
+            console.log(weatherDescription);
+            // ... and so on
+        })
+        .catch(error => {
+            // Handle errors here
+            console.error('Fetch error:', error);
+        });
 }
-    getWeatherData()
+getWeatherData()
+
+// var weatherDataContainer =
+//     function displayWeatherData(data) {
+//         weatherDataContainer.innerHTML = ""
+//         // Clear previous weather data
+//         // Extract and display relevant weather information here
+//         // Customize this part based on your API response structure
+//         const temperature = data.current.temp_f;
+//         const weatherDescription = data.current.condition.text;
+//         const weatherInfo =
+//             document.createElement('div');
+//         weatherInfo.innerHTML =
+//             <ul>
+//                 <li>Temperature: ${temperature}</li>
+//                 <li>Description: ${weatherDescription}</li>
+//             </ul>;
+
+//             weatherDataContainer.appendChild(weatherInfo);
+//     }
 
 // ****************basic page functions***********************************************************************
-    // *dropdown function 
+// *dropdown function 
 
 var dropdown = document.querySelector('.dropdown');
-dropdown.addEventListener('click', function(event) {
-  event.stopPropagation();
-  dropdown.classList.toggle('is-active');
+dropdown.addEventListener('click', function (event) {
+    event.stopPropagation();
+    dropdown.classList.toggle('is-active');
 });
 
 // *modal function 
@@ -163,16 +185,16 @@ dropdown.addEventListener('click', function(event) {
 var modalBtn = document.getElementById("modal-btn");
 var modalCard = document.getElementById("modal-card");
 var close = document.getElementById("close-modal");
- 
-modalBtn.onclick = function() {
+
+modalBtn.onclick = function () {
     modalCard.style.display = "block"
 }
 
-close.onclick = function() {
+close.onclick = function () {
     modalCard.style.display = "none"
 }
 
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target.className == "modal-background") {
         modalCard.style.display = "none";
     }
