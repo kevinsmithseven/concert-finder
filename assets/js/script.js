@@ -58,8 +58,8 @@ function cityFormSubmitHandler(event) {
     if (cityChoice) {
         getCityEventData(cityChoice);
 
-    } else {
-        alert("Please enter a city name");
+    // } else {
+    //     alert("Please enter a city name");
     }
     console.log(event.target);
 }
@@ -226,12 +226,38 @@ function getEventDetails(eventID) {
 
 function displayEventDetails(eventDetailsData) {
     var detailsHTML = `
-    <h2>${eventDetailsData.name}</h2>
-    `
-    mainDetail.innerHTML = detailsHTML
+        <img src="${eventDetailsData.seatmap.staticUrl}">
+        <br>
+        <h2>${eventDetailsData.name}</h2>
+        <ul>
+            <li>${eventDetailsData.dates.start.localDate || 'Date not available'}</li>
+            <li>${eventDetailsData.dates.start.localTime || 'Time not available'}</li>
+            <li>${eventDetailsData._embedded.venues[0]?.name || 'Venue not available'}</li>
+            <br>
+    `;
+
+    if (eventDetailsData.priceRanges && eventDetailsData.priceRanges.length > 0) {
+        detailsHTML += `
+            <li>Prices range from $${eventDetailsData.priceRanges[0].min || 'N/A'} to $${eventDetailsData.priceRanges[0].max || 'N/A'}</li>
+        `;
+    } else {
+        detailsHTML += `
+            <li>Price information not available</li>
+        `;
+    }
+
+    detailsHTML += `
+        </ul>
+        <br>
+        <p>${eventDetailsData.pleaseNote || 'No additional information available'}</p>
+        <br>
+        <p><a href="${eventDetailsData.url}">${eventDetailsData.url}</a></p>
+    `;
+
+    mainDetail.innerHTML = detailsHTML;
 }
 
-//TODO Seating chart image, Event Name, Date, Time, Price Range, Venue, City, State, URL to buy tickets - weather at bottom
+//TODO Seating chart image, Event Name, Date, Time, Price Range, Venue, City, State, URL to buy tickets , info- weather at bottom
 
 
 // //* function to fetch data for events for the artist entered in the modal form
