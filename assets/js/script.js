@@ -139,7 +139,7 @@ function displayCityEvents(cityEventData) {
              </p>
 
             </header>
-          <div class="card-content panel">
+          <div class="card-content">
            <div class="content">
             <ul>
             <li> ${events.dates.start.localTime}
