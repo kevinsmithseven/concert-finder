@@ -134,7 +134,7 @@ function displayCityEvents(cityEventData) {
         var cardHTML = `      
         <div class="card">
             <header class="card-header">
-             <p class="card-header-title accordion">
+             <p class="card-header-title">
                 ${events.name}
              </p>
              <button class="card-header-icon" aria-label="more options">
@@ -143,7 +143,7 @@ function displayCityEvents(cityEventData) {
                </span>
              </button>
             </header>
-          <div class="card-content panel">
+          <div class="card-content">
            <div class="content">
             <ul>
             <li> ${events.dates.start.localTime}
@@ -291,26 +291,26 @@ var currentDay = dayjs().format('DD/MM/YYYY')
 console.log(currentDay);
 
 
-// *card accordion
+// // *card accordion
 
-var acc = document.getElementsByClassName("accordion");
-var i;
+// var acc = document.getElementsByClassName("accordion");
+// var i;
 
-for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function () {
-        /* Toggle between adding and removing the "active" class,
-        to highlight the button that controls the panel */
-        this.classList.toggle("active");
+// for (i = 0; i < acc.length; i++) {
+//     acc[i].addEventListener("click", function () {
+//         /* Toggle between adding and removing the "active" class,
+//         to highlight the button that controls the panel */
+//         this.classList.toggle("active");
 
-        /* Toggle between hiding and showing the active panel */
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-            panel.style.display = "none";
-        } else {
-            panel.style.display = "block";
-        }
-    });
-}
+//         /* Toggle between hiding and showing the active panel */
+//         var panel = this.nextElementSibling;
+//         if (panel.style.display === "block") {
+//             panel.style.display = "none";
+//         } else {
+//             panel.style.display = "block";
+//         }
+//     });
+// }
 
 
 
