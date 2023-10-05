@@ -9,10 +9,13 @@ var modalSearchButton = document.getElementById("modal-btn");
 var mainDetail = document.getElementById("details-container");
 var saveEventButton = document.getElementById("save-btn)");
 var footer = document.getElementById("footer");
-var inputForm = document.getElementById("form-container");
+var inputFormCity = document.getElementById("form-container-city");
+var inputFormArtist = document.getElementById("form-container-artist");
 var inputCity = document.getElementById("city");
 var inputArtist = document.getElementById("artist")
-var submitButton = document.getElementById("submit-btn");
+var submitButtonCity = document.getElementById("submit-btn-city");
+var submitButtonArtist = document.getElementById("submit-btn-artist");
+var saveButton = document.querySelectorAll(".save-btn")
 
 
 // Gets Event data from Ticketmaster API
@@ -22,6 +25,7 @@ var submitButton = document.getElementById("submit-btn");
 //* {classificationName} can be used to limit results, we could use "Music"
 //* {startDate} and {endDate} we can use to limit time frame of the search, we would need to add dayjs functionality
 //* {city} this can be used to search for events in a specific city
+//* {sort=date,asc} sort by newest events first
 //* {id} - this will return the details for an event - can be found in the event array data
 
 // TODO Need to go over the various key options in array and decide which ones we want to use
@@ -41,35 +45,45 @@ var submitButton = document.getElementById("submit-btn");
 // TODO Logic - do we need separate functions for the above? I think yes
 // TODO add dayjs() to html so we can use to reference dates in logic, i.e, if we are limiting search to two weeks, we need to know current date for comparison
 
-//* accepts input from modal form and determines if a city or artist was entered and running the fetch function for that choice
-function modalFormSubmitHandler(event) {
+//* accepts input from city modal form and checks if city exists
+function cityFormSubmitHandler(event) {
     event.preventDefault();
-    //* establish variables that accept the input of either field and trim
-    var cityChoice = inputCity.elements.city.value.trim();
-    var artistChoice = inputArtist.elements.city.value.trim();
 
-    //* check and see whether there is input in either field and run the appropriate function - display alerts if none are filled or both
-    if (cityChoice && !artistChoice) {
+    //* establish variables that accept the input of the city text field and trim
+    var cityChoice = inputCity.value.trim();
+    console.log(cityChoice);
+    console.log(inputCity);
+
+    //* check and see whether there is input in the field and run the appropriate function - display alerts if none are filled or both
+    if (cityChoice) {
         getCityEventData(cityChoice);
-    }
 
-    if (!cityChoice && artistChoice) {
-        getArtistEventData(artistChoice);
+    } else {
+        alert("Please enter a city name");
     }
-
-    if (cityChoice && artistChoice) {
-        alert("Please enter only a city or an artist")
-    }
-
-    if (!cityChoice && !artistChoice) {
-        alert("Please enter a city or an artist to search")
-    }
+    console.log(event.target);
 }
+
+// //* accepts input from artist modal form and checks if artist exists
+// function artistFormSubmitHandler(event) {
+//     event.preventDefault();
+
+//     //* establish variables that accept the input of the artist text field and trim
+//     var artistChoice = inputArtist.elements.city.value.trim();    
+
+//     //* check and see whether there is input in the field and run the appropriate function - display alerts if none are filled or both
+//     if (artistChoice) {
+//         getArtistEventData(artistChoiceChoice);
+
+//     } else {
+//         alert("Please enter an artist name");
+//     }   
+// }
 
 
 //* function to fetch data for events in the city entered in the modal form
 function getCityEventData(cityChoice) {
-    var cityEventFetchURL = "https://app.ticketmaster.com/discovery/v2/events.json?city=" + cityChoice + "&apikey=" + concertAPIKey;
+    var cityEventFetchURL = "https://app.ticketmaster.com/discovery/v2/events.json?city=" + cityChoice + "&classificationName=Music&sort=date,asc&apikey=" + concertAPIKey;
 
     fetch(cityEventFetchURL)
         .then(function (response) {
@@ -81,30 +95,100 @@ function getCityEventData(cityChoice) {
         })
         .then(function (cityEventData) {
             console.log(cityEventData);
+
+
+            displayCityEvents(cityEventData);
         })
+
+        .catch(function (error) {
+            console.error(error.message);
+        });
+
 }
 
-//* function to fetch data for events for the artist entered in the modal form
-function getArtistEventData(artistChoice) {
-    var artistEventFetchURL = "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + artistChoice + "&apikey=" + concertAPIKey;
+// Display city events in cards in aside
+function displayCityEvents(cityEventData) {
+    console.log(cityEventData);
+    asideEventList.innerHTML = "";
 
-    fetch(artistEventFetchURL)
-        .then(function (response) {
-            if (response.ok) {
-                return response.json();
-            } else {
-                alert("Artist not found, please check spelling and try again")
-            }
-        })
-        .then(function (artistEventData) {
-            console.log(artistEventData);
-        })
+    // for (let i = 0; i < cityEventData._embedded.events.length; i++) {
+    //     const event = cityEventData._embedded.events[i];
+    //     const eventItem = document.createElement("li");
+    //     eventItem.textContent = event.name;
+    //     eventItem.classList.add("event-card"); // Add a CSS class for styling
+    //     eventItem.addEventListener("click", () => showEventDetails(event));
+    //     asideEventList.appendChild(eventItem);
+    // }
+
+    asideEventList.innerHTML = "";
+
+
+    for (let i = 0; i < 10; i++) {
+        var events = cityEventData._embedded.events[i];
+        var venue = cityEventData._embedded.events[i]._embedded.venues[0];
+        console.log(venue);
+        console.log(events);
+        // var priceRanges = cityEventData._embedded.events.priceRanges[i];
+        // console.log(priceRanges);
+
+        var cardHTML = `      
+        <div class="card">
+            <header class="card-header">
+             <p class="card-header-title accordion">
+                ${events.name}
+             </p>
+             <button class="card-header-icon" aria-label="more options">
+               <span class="icon">
+                 <i class="fas fa-angle-down" aria-hidden="true"></i>
+               </span>
+             </button>
+            </header>
+          <div class="card-content panel">
+           <div class="content">
+            <ul>
+            <li> ${events.dates.start.localTime}
+            <li> ${events.dates.start.localDate}
+            <li> ${venue.name}<br> ${venue.city.name}, ${venue.state.stateCode} 
+            <br>
+            </div>
+           
+      <footer class="card-footer">
+        <a href="#" class="card-footer-item save-btn" data-event-name=${events.name}>Save</a>
+        <a href="#" class="card-footer-item event-det-btn">See Event Details</a>
+        
+      </footer>
+      </div>
+
+     </div>   
+    `;
+
+        asideEventList.insertAdjacentHTML("beforeend", cardHTML);
+
+    }
 }
+
+
+// //* function to fetch data for events for the artist entered in the modal form
+// function getArtistEventData(artistChoice) {
+//     var artistEventFetchURL = "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + artistChoice + "&apikey=" + concertAPIKey;
+
+//     fetch(artistEventFetchURL)
+//         .then(function (response) {
+//             if (response.ok) {
+//                 return response.json();
+//             } else {
+//                 alert("Artist not found, please check spelling and try again")
+//             }
+//         })
+//         .then(function (artistEventData) {
+//             console.log(artistEventData);
+//         })
+// }
 
 
 
 // function testData () {
-//     var testDataURL = "https://app.ticketmaster.com/discovery/v2/events.json?city=Dallas&classificationName=Music&id=vvG1YZ9Rpgpfev&apikey=" + concertAPIKey;
+//     var testDataURL = "https://app.ticketmaster.com/discovery/v2/events.json?city=Dallas&classificationName=Music&apikey=" + concertAPIKey;
 
 //     fetch(testDataURL)
 //         .then(function (response) {
@@ -125,6 +209,8 @@ var weatherAPIKey = "4a5b27e8dacd4394811170611230310"
 
 function getWeatherData() {
     var city = 'Dallas';
+function getWeatherData() {
+    var location = 'Dallas'; // Replace with your desired location
     const apiUrl = `https://api.weatherapi.com/v1/forecast.json?q=${location}&key=${weatherAPIKey}`;
 
     fetch(apiUrl)
@@ -141,7 +227,7 @@ function getWeatherData() {
             // Extract specific weather information from the 'data' object as needed
             const temperature = data.current.temp_f;
             console.log(temperature);
-            const weatherDescription = data.current.condition.text;
+            const weatherDescription = data.current.condition[0];
             console.log(weatherDescription);
             // ... and so on
         })
@@ -150,6 +236,7 @@ function getWeatherData() {
             console.error('Fetch error:', error);
         });
 }
+getWeatherData()
 getWeatherData()
 
 // var weatherDataContainer =
@@ -182,22 +269,78 @@ dropdown.addEventListener('click', function (event) {
 
 // *modal function 
 
-var modalBtn = document.getElementById("modal-btn");
-var modalCard = document.getElementById("modal-card");
-var close = document.getElementById("close-modal");
+var modalBtnCity = document.getElementById("modal-btn-city");
+var modalBtnArtist = document.getElementById("modal-btn-artist");
+var modalCardCity = document.getElementById("modal-card-city");
+var modalCardArtist = document.getElementById("modal-card-artist");
+var closeModalCity = document.getElementById("close-modal-city");
+var closeModalArtist = document.getElementById("close-modal-artist");
+var modalBackgroundArtist = document.getElementById("modal-background-artist")
+var modalBackgroundCity = document.getElementById("modal-background-city")
 
-modalBtn.onclick = function () {
-    modalCard.style.display = "block"
+modalBtnCity.onclick = function () {
+    modalCardCity.style.display = "block"
 }
 
-close.onclick = function () {
-    modalCard.style.display = "none"
+closeModalCity.onclick = function () {
+    modalCardCity.style.display = "none"
+}
+
+modalBackgroundCity.onclick = function (event) {
+
+    if (event.target == modalBackgroundCity) {
+        modalCardCity.style.display = "none";
+
+    }
+};
+
+
+
+
+modalBtnArtist.onclick = function () {
+    modalCardArtist.style.display = "block"
+}
+
+closeModalArtist.onclick = function () {
+    modalCardArtist.style.display = "none"
 }
 
 window.onclick = function (event) {
-    if (event.target.className == "modal-background") {
-        modalCard.style.display = "none";
+    if (event.target == modalBackgroundArtist) {
+        modalCardArtist.style.display = "none";
+
     }
+};
+
+var currentDay = dayjs().format('DD/MM/YYYY')
+console.log(currentDay);
+
+
+// *card accordion
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function () {
+        /* Toggle between adding and removing the "active" class,
+        to highlight the button that controls the panel */
+        this.classList.toggle("active");
+
+        /* Toggle between hiding and showing the active panel */
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+            panel.style.display = "none";
+        } else {
+            panel.style.display = "block";
+        }
+    });
 }
 
+
+
 // ****************basic page functions***********************************************************************
+
+//* Event listeners
+
+submitButtonCity.addEventListener('click', cityFormSubmitHandler);

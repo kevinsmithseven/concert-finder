@@ -23,7 +23,7 @@
             aria-haspopup="true"
             aria-controls="dropdown-menu"
           >
-            <span>Dropdown button</span>
+            <span>Dropdown button </span>
             <span class="icon is-small">
               <i class="fas fa-angle-down" aria-hidden="true"></i>
             </span>
@@ -55,55 +55,132 @@
     <!-- *flex parent for aside and main  -->
     <div id="flexMain">
       <!-- *section for aside  -->
-      <section id="events-container" class="section is-meduim">
+      <section  class="section is-meduim">
         <h1 class="title">Look for events!</h1>
-<!-- *this button will pop out the modal  -->
-        <button id="modal-btn" class="button is-medium js-modal-trigger" data-target="modal-js-example">Search</button>
+        <!-- *this button will pop out the modal  -->
+        <button
+          id="modal-btn-city"
+          class="button is-medium js-modal-trigger"
+          data-target="modal-js-example"
+        >
+          Search City
+        </button>
+
+        <button
+          id="modal-btn-artist"
+          class="button is-medium js-modal-trigger"
+          data-target="modal-js-example"
+        >
+          Search Artist
+        </button>
 
         <h2 class="subtitle">
-         this is a placeholder for where the search results will append to the page.
+          this is a placeholder for where the search results will append to the
+          page.
         </h2>
-        <div>
-            <ul>
-                <li></li>
-                <li></li>
-            </ul>
+
+        <!-- *populate cards here  -->
+
+        <div id="events-container">
+
+          <!-- <form id="form-container-city" class="section modal-wrap">
+            <div class="field">
+              <label class="label">City:</label>
+              <div class="control">
+                <input
+                  id="city"
+                  class="input"
+                  type="text"
+                  name="city"
+                  placeholder="e.g Dallas"
+                />
+              </div>
+            </div>
+            <button id="submit-btn-city" class="button is-primary">
+              Submit
+            </button>
+          </form> -->
+
+
         </div>
       </section>
 
-<!-- *modal placeholder  -->
-      <div class="modal" id="modal-card">
-        <div class="modal-background"></div>
+      <!-- *modal placeholder  -->
+      <div class="modal" id="modal-card-city">
+        <div id="modal-background-city" class="modal-background"></div>
         <div class="modal-card">
           <header id="modal-header" class="modal-card-head">
-            <p class="modal-card-title">Modal title</p>
-            <button id="close-modal" class="delete" aria-label="close"></button>
+            <p class="modal-card-title">Search by City</p>
+            <button
+              id="close-modal-city"
+              class="delete"
+              aria-label="close"
+            ></button>
           </header>
           <section class="modal-card-body">
             <!-- Content ... -->
-            <form id="form-container" class="section modal-wrap">
-            <div class="field">
+            <form id="form-container-city" class="section modal-wrap">
+              <div class="field">
                 <label class="label">City:</label>
                 <div class="control">
-                  <input class="input" type="text" placeholder="e.g Dallas">
+                  <input
+                    id="city"
+                    class="input"
+                    name="city"
+                    type="text"
+                    placeholder="e.g Dallas"
+                  />
                 </div>
               </div>
-
-              <div class="field">
-                <label class="label">Band</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="e.g Modest Mouse">
-                </div>
-              </div>
-
             </form>
-              
           </section>
 
           <footer class="modal-card-foot">
             <div class="control">
-                <button class="button is-primary">Submit</button>
+              <button id="submit-btn-city" class="button is-primary">
+                Submit
+              </button>
+            </div>
+            <!-- <button class="button">Cancel</button> -->
+          </footer>
+        </div>
+      </div>
+
+      <!-- *modal placeholder  -->
+      <div class="modal" id="modal-card-artist">
+        <div id="modal-background-artist" class="modal-background"></div>
+        <div class="modal-card">
+          <header id="modal-header" class="modal-card-head">
+            <p class="modal-card-title">Search by Artist</p>
+            <button
+              id="close-modal-artist"
+              class="delete"
+              aria-label="close"
+            ></button>
+          </header>
+          <section class="modal-card-body">
+            <!-- Content ... -->
+            <form id="form-container-artist" class="section modal-wrap">
+              <div class="field">
+                <label class="label">Artist</label>
+                <div class="control">
+                  <input
+                    id="artist"
+                    class="input"
+                    type="text"
+                    placeholder="e.g Modest Mouse"
+                  />
+                </div>
               </div>
+            </form>
+          </section>
+
+          <footer class="modal-card-foot">
+            <div class="control">
+              <button id="submit-btn-artist" class="button is-primary">
+                Submit
+              </button>
+            </div>
             <!-- <button class="button">Cancel</button> -->
           </footer>
         </div>
@@ -112,24 +189,35 @@
       <!-- *section for main  -->
       <section id="event-details" class="section is-large">
         <h1 class="title">Event Details</h1>
-        <h2 class="subtitle">
-         this is a placeholder for where the selected event details from aside will render.
-        </h2>
+
+        <!-- *populate details here!  -->
+        <div id="details-container">
+
+        </div>
+
       </section>
     </div>
-<!-- *footer placeholder  -->
+    <!-- *footer placeholder  -->
     <footer class="footer">
-        <div class="content has-text-centered">
-          <p>
-            <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
-            <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
-            is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
-          </p>
-        </div>
-      </footer>
+      <div class="content has-text-centered">
+        <p>
+          <strong>Bulma</strong> by
+          <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is
+          licensed
+          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The
+          website content is licensed
+          <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+            >CC BY NC SA 4.0</a
+          >.
+        </p>
+      </div>
+    </footer>
 
-      <!-- <script src="path/to/the/downloaded/folder/dist/bulma.js"></script> -->
-      <script src="./assets/js/pageFunction.js" ></script>
+    <!-- <script src="path/to/the/downloaded/folder/dist/bulma.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
