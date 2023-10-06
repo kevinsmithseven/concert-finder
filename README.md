@@ -10,7 +10,8 @@ The application is also mobile responsive.
 
 Link to application:
 
-<!-- add link to deployed site-->
+https://kevinsmithseven.github.io/concert-finder/
+
 
 ## Usage
 
