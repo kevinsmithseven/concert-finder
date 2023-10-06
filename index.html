@@ -12,8 +12,8 @@
     <title>GigGuide</title>
   </head>
   <body>
-    <header>
-      <h1 class="title">GigGuide</h1>
+    <header id="top-header">
+      <h1 id="title" class="title">GigGuide</h1>
       <!-- *dropdown nav for saved content  -->
 
       <div class="dropdown">
@@ -192,25 +192,27 @@
 
 
       </section>
+
+            <!-- *error modal for nothing submitted  -->
+            <div class="modal" id="error-modal" >
+              <div id="modal-background-error" class="modal-background"></div>
+              <div class="modal-card">
+                <header id="modal-header" class="modal-card-head">
+                  <p class="modal-card-title">Oops!</p>
+                  <button
+                    id="close-modal-error"
+                    class="delete"
+                    aria-label="close"
+                  ></button>
+                </header>
+                <section class="modal-card-body">
+                  <p>Please search for a city.</p>
+                  </section>
+      
+            </div>
     </main>
 
-      <!-- *error modal for nothing submitted  -->
-      <div class="modal" id="error-modal" >
-        <div id="modal-background-error" class="modal-background"></div>
-        <div class="modal-card">
-          <header id="modal-header" class="modal-card-head">
-            <p class="modal-card-title">Oops!</p>
-            <button
-              id="close-modal-error"
-              class="delete"
-              aria-label="close"
-            ></button>
-          </header>
-          <section class="modal-card-body">
-            <p>Please search for a city.</p>
-            </section>
 
-      </div>
 
     
     <!-- *footer placeholder  -->

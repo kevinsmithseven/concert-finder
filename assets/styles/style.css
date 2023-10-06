@@ -43,11 +43,14 @@ h1 {
     border-radius: 5px;
 
 } */
-header {
-  /* background-color: white; */
-  color: #fff;
+#top-header {
+  background-image: url(../img/header-img.jpeg);
+ 
   padding: 20px;
 }
+
+
+
 .dropdown button {
   background-color: #333;
   color: #fff;
@@ -70,8 +73,12 @@ header {
   color: #333;
 }
 
+#title {
+    color: #fff;
+}
 .custom-card {
 width: 260px;
+margin: 0 2em;
 }
 
 /* #events-container {
@@ -120,11 +127,13 @@ width: 260px;
 
   section h1 {
 padding: 40px;
+text-align: center;
   }
 
   #modal-btn-city {
     background-color: #333;
     color: #fff;
+    margin: 0 4em;
   }
 
   
