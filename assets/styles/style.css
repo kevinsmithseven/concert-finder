@@ -1,8 +1,7 @@
-/* header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 5px solid black;
+
+
+/* body {
+    background-color: aquamarine;
 } */
 
 h1 {
@@ -26,6 +25,8 @@ h1 {
     top: 30%;
 }
 
+
+
 /* #events-container {
     border: 2px solid black;
     border-radius: 5px;
@@ -38,7 +39,7 @@ h1 {
 
 } */
 header {
-  background-color: white;
+  /* background-color: white; */
   color: #fff;
   padding: 20px;
 }
@@ -61,12 +62,14 @@ header {
   color: #333;
 }
 
+.custom-card {
+width: 260px;
+}
 
-
-#events-container {
+/* #events-container {
   flex: 1;
   padding: 20px;
-}
+} */
 
 #modal-btn {
   background-color: #333;
@@ -84,10 +87,10 @@ header {
   max-width: 600px;
 }
 
-#event-details {
+/* #event-details {
   flex: 2;
   padding: 20px;
-}
+} */
 
 .footer {
   background-color: #333;

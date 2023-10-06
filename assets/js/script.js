@@ -132,7 +132,7 @@ function displayCityEvents(cityEventData) {
         // console.log(priceRanges);
 
         var cardHTML = `      
-        <button class="card accordion">
+        <button class="card custom-card">
             <header class="card-header">
              <p class="card-header-title">
                 ${events.name}
