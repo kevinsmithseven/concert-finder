@@ -163,12 +163,6 @@ function displayCityEvents(cityEventData) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    var savedEvents = JSON.parse(localStorage.getItem("saved-events")) || [];
-    displaySaved(savedEvents);
-});
-
-
 document.body.addEventListener('click', function (event) {
     if (event.target && event.target.classList.contains("save-btn")) {
         const eventName = event.target.getAttribute("data-event-name")
