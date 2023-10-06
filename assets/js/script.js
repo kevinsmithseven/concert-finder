@@ -163,7 +163,6 @@ function displayCityEvents(cityEventData) {
     }
 }
 
-
 document.body.addEventListener('click', function (event) {
     if (event.target && event.target.classList.contains("save-btn")) {
         const eventName = event.target.getAttribute("data-event-name")
@@ -190,11 +189,14 @@ function displaySaved(savedEvents) {
         var dropdownItem = document.createElement("a");
         dropdownItem.href = "#"
         dropdownItem.classList.add("dropdown-item")
+       
         dropdownItem.textContent = savedEventList
 
         dropdownContent.appendChild(dropdownItem)
     }
 }
+
+
 
 document.body.addEventListener('click', function (event) {
     if (event.target && event.target.classList.contains("event-det-btn")) {
@@ -223,6 +225,16 @@ function getEventDetails(eventID) {
         })
 
 }
+// *************************
+// function dropdownItemClick(event) {
+//     if (event.target && event.target.classList.contains("dropdown-item")) {
+//         var eventID = event.target.getAttribute("data-event-id");
+//         getEventDetails(eventID);
+//     }
+// }
+
+// document.querySelector(".dropdown-content").addEventListener('click', dropdownItemClick);
+
 
 function displayEventDetails(eventDetailsData) {
     var detailsHTML = `
