@@ -165,7 +165,6 @@ function displayCityEvents(cityEventData) {
     getWeatherData()
 }
 
-
 document.body.addEventListener('click', function (event) {
     if (event.target && event.target.classList.contains("save-btn")) {
         const eventName = event.target.getAttribute("data-event-name")
@@ -200,6 +199,8 @@ function displaySaved(savedEvents) {
     }
 }
 
+
+
 document.body.addEventListener('click', function (event) {
     if (event.target && event.target.classList.contains("event-det-btn")) {
         var eventID = event.target.getAttribute("data-event-id")
@@ -228,6 +229,16 @@ function getEventDetails(eventID) {
         })
 
 }
+// *************************
+// function dropdownItemClick(event) {
+//     if (event.target && event.target.classList.contains("dropdown-item")) {
+//         var eventID = event.target.getAttribute("data-event-id");
+//         getEventDetails(eventID);
+//     }
+// }
+
+// document.querySelector(".dropdown-content").addEventListener('click', dropdownItemClick);
+
 
 function displayEventDetails(eventDetailsData) {
     var detailsHTML = `
