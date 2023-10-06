@@ -59,8 +59,8 @@ function cityFormSubmitHandler(event) {
     if (cityChoice) {
         getCityEventData(cityChoice);
 
-        // } else {
-        //     alert("Please enter a city name");
+        } else {
+            errorModalCard.style.display = "block";
     }
     console.log(event.target);
 }
@@ -133,7 +133,7 @@ function displayCityEvents(cityEventData) {
         // console.log(priceRanges);
 
         var cardHTML = `      
-        <button class="card accordion">
+        <button class="card custom-card">
             <header class="card-header">
              <p class="card-header-title">
                 ${events.name}
@@ -391,9 +391,14 @@ var modalCardCity = document.getElementById("modal-card-city");
 var modalCardArtist = document.getElementById("modal-card-artist");
 var closeModalCity = document.getElementById("close-modal-city");
 
+var closeModalError = document.getElementById("close-modal-error");
+var errorModalCard = document.getElementById("error-modal");
+
+
 var closeModalArtist = document.getElementById("close-modal-artist");
 var modalBackgroundArtist = document.getElementById("modal-background-artist");
 var modalBackgroundCity = document.getElementById("modal-background-city");
+var modalBackgroundError = document.getElementById("modal-background-error")
 
 modalBtnCity.onclick = function () {
     modalCardCity.style.display = "block"
@@ -411,6 +416,18 @@ modalBackgroundCity.onclick = function (event) {
 
     if (event.target == modalBackgroundCity) {
         modalCardCity.style.display = "none";
+
+    }
+};
+
+closeModalError.onclick = function () {
+    modalCardCity.style.display = "none"
+}
+
+modalBackgroundError.onclick = function (event) {
+
+    if (event.target == modalBackgroundError) {
+        errorModalCard.style.display = "none";
 
     }
 };

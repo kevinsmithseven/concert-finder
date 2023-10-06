@@ -12,8 +12,8 @@
     <title>GigGuide</title>
   </head>
   <body>
-    <header>
-      <h1 class="title">GigGuide</h1>
+    <header id="top-header">
+      <h1 id="title" class="title">GigGuide</h1>
       <!-- *dropdown nav for saved content  -->
 
       <div class="dropdown">
@@ -46,9 +46,9 @@
     </section>
 
     <!-- *flex parent for aside and main  -->
-    <main id="reverse-columns" class="columns" >
+    <main id="reverse-columns" class="columns is-centered" >
       <!-- *section for aside  -->
-      <section  class="column">
+      <section  class="column is-one-third">
         <h1 class="title">Look for events!</h1>
         <!-- *this button will pop out the modal  -->
         <button
@@ -98,6 +98,8 @@
         </div>
       </section>
 
+
+
       <!-- *modal placeholder  -->
       <div class="modal" id="modal-card-city">
         <div id="modal-background-city" class="modal-background"></div>
@@ -127,7 +129,7 @@
               </div>
             </form>
           </section>
-<a href=""></a>
+
           <footer class="modal-card-foot">
             <div class="control">
               <button id="submit-btn-city" class="button is-primary">
@@ -180,7 +182,7 @@
       </div>
 
       <!-- *section for main  -->
-      <section id="event-details" class="column">
+      <section id="event-details" class="column is-two-thirds">
         <h1 class="title">Event Details</h1>
 
         <!-- *populate details here!  -->
@@ -190,7 +192,26 @@
 
 
       </section>
+
+            <!-- *error modal for nothing submitted  -->
+            <div class="modal" id="error-modal" >
+              <div id="modal-background-error" class="modal-background"></div>
+              <div class="modal-card">
+                <header id="modal-header" class="modal-card-head">
+                  <p class="modal-card-title">Oops!</p>
+                  <button
+                    id="close-modal-error"
+                    class="delete"
+                    aria-label="close"
+                  ></button>
+                </header>
+                <section class="modal-card-body">
+                  <p>Please search for a city.</p>
+                  </section>
+      
+            </div>
     </main>
+
 
 
     

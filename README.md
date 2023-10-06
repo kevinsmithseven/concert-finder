@@ -10,7 +10,8 @@ The application is also mobile responsive.
 
 Link to application:
 
-<!-- add link to deployed site-->
+https://kevinsmithseven.github.io/concert-finder/
+
 
 ## Usage
 
@@ -18,7 +19,7 @@ Upon page load, the user will see the landing page with a header, a "My Saved Ev
 
 Screenshot of the application:
     
-![Screenshot of GigGuru](/assets/images/weather-dashboard-fullscreen-capture.png)
+![Screenshot of GigGuide](./assets/img/concert-finder-screenshot.png)
 
 ## Credits
 
