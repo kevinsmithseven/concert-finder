@@ -7,7 +7,7 @@ var hero = document.querySelector(".hero");
 var asideEventList = document.getElementById("events-container");
 var modalSearchButton = document.getElementById("modal-btn");
 var mainDetail = document.getElementById("details-container");
-var saveEventButton = document.getElementById("save-btn)");
+var saveEventButton = document.getElementById("save-btn");
 var footer = document.getElementById("footer");
 var inputFormCity = document.getElementById("form-container-city");
 var inputFormArtist = document.getElementById("form-container-artist");
@@ -16,6 +16,7 @@ var inputArtist = document.getElementById("artist")
 var submitButtonCity = document.getElementById("submit-btn-city");
 var submitButtonArtist = document.getElementById("submit-btn-artist");
 var saveButton = document.querySelectorAll(".save-btn")
+var cityForWeather = inputCity.value.trim();
 
 
 // Gets Event data from Ticketmaster API
@@ -58,8 +59,8 @@ function cityFormSubmitHandler(event) {
     if (cityChoice) {
         getCityEventData(cityChoice);
 
-    // } else {
-    //     alert("Please enter a city name");
+        // } else {
+        //     alert("Please enter a city name");
     }
     console.log(event.target);
 }
@@ -161,6 +162,7 @@ function displayCityEvents(cityEventData) {
         asideEventList.insertAdjacentHTML("beforeend", cardHTML);
 
     }
+    getWeatherData()
 }
 
 document.body.addEventListener('click', function (event) {
@@ -189,10 +191,11 @@ function displaySaved(savedEvents) {
         var dropdownItem = document.createElement("a");
         dropdownItem.href = "#"
         dropdownItem.classList.add("dropdown-item")
-       
+        dropdownItem.classList.add("event-det-btn")
         dropdownItem.textContent = savedEventList
 
         dropdownContent.appendChild(dropdownItem)
+
     }
 }
 
@@ -209,6 +212,7 @@ document.body.addEventListener('click', function (event) {
 
 function getEventDetails(eventID) {
     var eventIDURL = "https://app.ticketmaster.com/discovery/v2/events/" + eventID + ".json?apikey=" + concertAPIKey;
+
 
     fetch(eventIDURL)
         .then(function (response) {
@@ -246,6 +250,7 @@ function displayEventDetails(eventDetailsData) {
             <li>${eventDetailsData.dates.start.localTime || 'Time not available'}</li>
             <li>${eventDetailsData._embedded.venues[0]?.name || 'Venue not available'}</li>
             <br>
+          
     `;
 
     if (eventDetailsData.priceRanges && eventDetailsData.priceRanges.length > 0) {
@@ -312,7 +317,7 @@ function displayEventDetails(eventDetailsData) {
 var weatherAPIKey = "4a5b27e8dacd4394811170611230310"
 
 function getWeatherData() {
-    var location = 'Dallas'; // Replace with your desired location
+    var location = inputCity.value.trim();
     const apiUrl = `https://api.weatherapi.com/v1/forecast.json?q=${location}&key=${weatherAPIKey}`;
 
     fetch(apiUrl)
@@ -329,16 +334,26 @@ function getWeatherData() {
             // Extract specific weather information from the 'data' object as needed
             const temperature = data.current.temp_f;
             console.log(temperature);
-            const weatherDescription = data.current.condition[0];
+            const weatherDescription = data.current.condition.text;
             console.log(weatherDescription);
             // ... and so on
+
+            var weatherHTML = `
+            <h3>Weather Information</h3>
+            <ul>
+                <li>Temperature: ${temperature}°F</li>
+                <li>Condition: ${weatherDescription}</li>
+            <ul>    
+            `
+            mainDetail.innerHTML = weatherHTML
+
         })
         .catch(error => {
             // Handle errors here
             console.error('Fetch error:', error);
         });
 }
-getWeatherData()
+
 
 // var weatherDataContainer =
 //     function displayWeatherData(data) {
@@ -451,3 +466,8 @@ console.log(currentDay);
 //* Event listeners
 
 submitButtonCity.addEventListener('click', cityFormSubmitHandler);
+
+document.addEventListener('DOMContentLoaded', function () {
+    var savedEvents = JSON.parse(localStorage.getItem("saved-events")) || [];
+    displaySaved(savedEvents);
+});
