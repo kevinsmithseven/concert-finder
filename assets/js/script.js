@@ -163,6 +163,11 @@ function displayCityEvents(cityEventData) {
     }
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    var savedEvents = JSON.parse(localStorage.getItem("saved-events")) || [];
+    displaySaved(savedEvents);
+});
+
 
 document.body.addEventListener('click', function (event) {
     if (event.target && event.target.classList.contains("save-btn")) {
@@ -190,11 +195,14 @@ function displaySaved(savedEvents) {
         var dropdownItem = document.createElement("a");
         dropdownItem.href = "#"
         dropdownItem.classList.add("dropdown-item")
+       
         dropdownItem.textContent = savedEventList
 
         dropdownContent.appendChild(dropdownItem)
     }
 }
+
+
 
 document.body.addEventListener('click', function (event) {
     if (event.target && event.target.classList.contains("event-det-btn")) {
@@ -223,6 +231,16 @@ function getEventDetails(eventID) {
         })
 
 }
+// *************************
+// function dropdownItemClick(event) {
+//     if (event.target && event.target.classList.contains("dropdown-item")) {
+//         var eventID = event.target.getAttribute("data-event-id");
+//         getEventDetails(eventID);
+//     }
+// }
+
+// document.querySelector(".dropdown-content").addEventListener('click', dropdownItemClick);
+
 
 function displayEventDetails(eventDetailsData) {
     var detailsHTML = `
