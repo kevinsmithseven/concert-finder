@@ -6,14 +6,15 @@ This project is an application that allows users to find upcoming concerts in a 
 
 When the user clicks on the "See Event Details" link on the event card, information will be displayed under the event details section of the page and will feature a seating chart and additional details of the event, including a link that will take them to the site for purchasing tickets.
 
+The application is also mobile responsive.
 
 Link to application:
 
-https://kevinsmithseven.github.io/weather-dashboard/
+<!-- add link to deployed site-->
 
 ## Usage
 
-Upon page load, the user will see a header, an entry field with a placeholder city, a search button, a blank box on the right and an empty 5-Day forecast section. The user will enter a city into the search field and either click the button or hit enter to start the search. The page will then display the current weather data and the five day forecast for the selected city. A button will also appear in the history section below the search bar that the user can click on at any time later to refresh the weather data for that city. If the user submits without entering a city or a city that does not exist, an alert will appear indicating such.
+Upon page load, the user will see the landing page with a header, a "My Saved Events" button, a hero image with the GigGuide text logo and tagline. They will also be invited to search for an event by clicking on the Search City button. When that ios clicked, a modal will pop up and present them with an input field where they can enter a city and click submit. Once submitted, a series or cards will appear in the left aside with details about upcoming events in the searched for city, sorted from sooner to later. The user can click on the card save button to save that event in local storage for later viewing. They can click the "See Event Details" button to display more information in the main section of the screen under the Event Details heading. This will include a seating map, price ranges of tickets (if available) and additional information of note that the host has provided (if available)
 
 Screenshot of the application:
     
@@ -21,13 +22,12 @@ Screenshot of the application:
 
 ## Credits
 
-Special thanks to Dominique Meeks Gombe, who provided tutoring and guidance to me while I was working on this project, as well as Leif Hetland and Fred Kamm, our class instructors, for additional support, assistance and oft needed morale boosting.
+Special thanks to Fred Kamm for his expert guidance and assistance while we were developing this project.
 
-In completing this project, I utilized the below resources to assist:
+In completing this project, we utilized the below resources
 
-https://openweathermap.org/api  
-https://day.js.org/  
-https://getbootstrap.com/docs/5.1/getting-started/introduction/  
+https://bulma.io/  
+https://www.weatherapi.com/   
 https://coding-boot-camp.github.io/full-stack/github/professional-readme-guide  
 https://www.markdownguide.org/basic-syntax/
 
